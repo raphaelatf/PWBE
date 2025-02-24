@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-Do List (Lista de Tarefas)</title>
+</head>
+<body>
+    <h1>Tarefas</h1>
+    <ul>
+        {% for tarefa in lista %}
+        
+            <li>
+                <h2>{{tarefa.descricao}}</h2>
+                <p>{{tarefa.status}}</p>
+            </li>
+
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
