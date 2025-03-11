@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+            background-color: #9960be;
+            color: white;
+            margin: 0;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        input[name="info_livro"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 400px;
+            margin-right: 10px;
+            border: 1px solid #b8b6b6;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #9960be;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #9960be;
+        }
+
+        a {
+            text-decoration: none;
+            color: #8d5fc2;
+            font-weight: 600;
+        }
+
+        a:hover {
+            color: #d4a4f5;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px;
+        }
+
+        li {
+            background-color: white;
+            margin: 10px 80px;
+            padding: 15px;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        li h2 {
+            margin: 0;
+            font-size: 1.5em;
+            color: #333;
+        }
+
+        li p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .botoes{
+            display: flex;
+            gap: 30px;
+            padding-top: 10px;
+        }
+
+        .add_livro{
+            height: 50px;
+            width: 300px;
+            font-size: 20px;
+        }
+
+    </style>
+
+</head>
+<body>
+    <h1>Biblioteca</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <input name="info_livro"></input>
+
+        <button type="submit">Pesquisar</button>
+    
+    </form>
+    <ul>
+        {% for i in livro %}
+            <li>
+                <h2>{{i.titulo}}</h2>
+                <p>Autor: {{i.autor}}</p>
+                <p>Ano: {{i.ano}}</p>
+                <div class="botoes">
+                    <a href="{% url 'livro_update'  i.pk %}">Editar</a>
+                    <a href="{% url 'livro_delete'  i.pk %}">Deletar</a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>  
+
+    <form action="{% url 'livro_create' %}" method="get">
+        <button class = "add_livro" type="submit">Adicionar novo livro</button>
+    </form>
+    
+    <ul>
+        {%for i in livros %}
+            <li>
+                <h2>{{i.titulo}}</h2>
+                <p>Autor: {{i.autor}}</p>
+                <p>Ano: {{i.ano}}</p>
+                <div class="botoes">
+                    <a href="{% url 'livro_update' i.pk %}">Editar</a>
+                    <a href="{% url 'livro_delete' i.pk %}">Deletar</a>
+                </div>
+                
+            </li>
+
+        {%endfor %}
+
+    </ul>
+</body>
+</html>
